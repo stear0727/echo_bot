@@ -1,16 +1,26 @@
-from flask import Flask
+from line_bot_sdk import WebhookHandler
 
 app = Flask(__name__)
+handler = WebhookHandler('your-channel-secret')
 
-@app.route("/")
-def hello():
+@app.route("/", methods=["GET"])
+def home():
     return "Hello, World!"
 
+@app.route("/callback", methods=["POST"])
+def callback():
+    if request.method == 'POST':
+        signature = request.headers['X-Line-Signature']
+        body = request.get_data(as_text=True)
+        try:
+            handler.handle(body, signature)
+        except Exception as e:
+            print(f"Error: {e}")
+            abort(400)
+        return 'OK'
+
 if __name__ == "__main__":
-    # 使用 0.0.0.0 綁定地址，並從環境變數獲取端口號
-    import os
-    port = int(os.environ.get("PORT", 8000))  # 默認端口為 8000
-    app.run(host="0.0.0.0", port=port)
+    app.run(host='0.0.0.0', port=8000)
 
 
 from flask import Flask, request, abort
