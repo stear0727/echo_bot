@@ -1,3 +1,5 @@
+
+from flask import Flask, request, abort
 from line_bot_sdk import WebhookHandler
 
 app = Flask(__name__)
@@ -21,10 +23,7 @@ def callback():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
-
-
-from flask import Flask, request, abort
-
+    
 from linebot.v3 import (
     WebhookHandler
 )
