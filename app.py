@@ -1,3 +1,18 @@
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello, World!"
+
+if __name__ == "__main__":
+    # 使用 0.0.0.0 綁定地址，並從環境變數獲取端口號
+    import os
+    port = int(os.environ.get("PORT", 8000))  # 默認端口為 8000
+    app.run(host="0.0.0.0", port=port)
+
+
 from flask import Flask, request, abort
 
 from linebot.v3 import (
