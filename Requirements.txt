@@ -1,3 +1,2 @@
-pip==24.3.1
 line-bot-sdk==3.14.2
 flask==3.1.0
