@@ -1,6 +1,6 @@
 
 from flask import Flask, request, abort
-from line_bot_sdk import WebhookHandler
+from line-bot-sdk import WebhookHandler
 
 app = Flask(__name__)
 handler = WebhookHandler('your-channel-secret')
