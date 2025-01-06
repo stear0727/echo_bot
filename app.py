@@ -3,29 +3,6 @@ from flask import Flask, request, abort
 from line_bot_sdk import WebhookHandler
 import os
 
-app = Flask(__name__)
-configuration = Configuration(access_token=os.getenv('CHANNEL_ACCESS_TOKEN'))
-line_handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
-
-@app.route("/", methods=["GET"])
-def home():
-    return "Hello, World!"
-
-@app.route("/callback", methods=["POST"])
-def callback():
-    if request.method == 'POST':
-        signature = request.headers['X-Line-Signature']
-        body = request.get_data(as_text=True)
-        try:
-            handler.handle(body, signature)
-        except Exception as e:
-            print(f"Error: {e}")
-            abort(400)
-        return 'OK'
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
-    
 from linebot.v3 import (
     WebhookHandler
 )
@@ -50,6 +27,9 @@ from linebot.v3.webhooks import (
 )
 
 app = Flask(__name__)
+
+configuration = Configuration(access_token=os.getenv('CHANNEL_ACCESS_TOKEN'))
+line_handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
