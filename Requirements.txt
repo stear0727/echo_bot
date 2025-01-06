@@ -1,2 +1,2 @@
-pip install line-bot-sdk==3.7
+pip install line-bot-sdk==3.14.2
 pip install flask==3.0.0
