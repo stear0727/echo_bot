@@ -116,5 +116,8 @@ def handle_postback(event):
 
 
 if __name__ == "__main__":
-    app.run()
+    # 修改此行以綁定到 0.0.0.0 並使用 Render 提供的端口
+    port = int(os.getenv("PORT", 5000))  # 默認端口為 5000
+    app.run(host='0.0.0.0', port=port)
+
 
