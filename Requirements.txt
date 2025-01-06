@@ -1,2 +1,3 @@
+--upgrade pip
 line-bot-sdk
 flask
